@@ -1,5 +1,10 @@
 # pure_numpy_fluid.py
 # 2D incompressible flow with semi-Lagrangian advection, vorticity confinement, Jacobi projection.
+#
+# NOTE: For an interactive GUI version of this simulation, see:
+#   python fluid_gui.py
+#
+# This file contains the original headless implementation for reference and comparison.
 import numpy as np, math
 
 # ---------- boundaries ----------
