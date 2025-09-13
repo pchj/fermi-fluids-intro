@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fermi Fluids: An Interactive Introduction</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Using local Canvas-based visualizations instead of external libraries -->
+</head>
+<body>
+    <header>
+        <h1>Fermi Fluids: An Interactive Introduction</h1>
+        <nav>
+            <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#fermi-sphere">Fermi Sphere</a></li>
+                <li><a href="#quasiparticles">Quasiparticles</a></li>
+                <li><a href="#interactions">Interactions</a></li>
+                <li><a href="#transport">Transport Properties</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="introduction" class="section">
+            <h2>What is a Fermi Fluid?</h2>
+            <div class="content-grid">
+                <div class="text-content">
+                    <p>
+                        A Fermi fluid (or Fermi liquid) is a theoretical model that describes the behavior of 
+                        interacting fermions at low temperatures. Despite strong interactions between particles, 
+                        the system behaves remarkably like a gas of non-interacting fermions with renormalized 
+                        parameters.
+                    </p>
+                    <p>
+                        The key insight of Landau's Fermi fluid theory is that low-energy excitations can be 
+                        described as "quasiparticles" that have a one-to-one correspondence with the particles 
+                        of a non-interacting Fermi gas.
+                    </p>
+                </div>
+                <div class="visualization-container">
+                    <canvas id="intro-viz" class="visualization" width="500" height="400"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="fermi-sphere" class="section">
+            <h2>The Fermi Sphere and Fermi Surface</h2>
+            <div class="content-grid">
+                <div class="text-content">
+                    <p>
+                        In momentum space, fermions at T = 0 fill all states up to the Fermi momentum 
+                        \(k_F\), forming a sphere in 3D. The boundary of this filled region is called 
+                        the Fermi surface.
+                    </p>
+                    <p>
+                        The Fermi energy is given by:
+                        $$E_F = \frac{\hbar^2 k_F^2}{2m}$$
+                    </p>
+                    <p>
+                        Use the controls below to explore how temperature affects the Fermi distribution:
+                    </p>
+                    <div class="controls">
+                        <label for="temperature-slider">Temperature (k<sub>B</sub>T/E<sub>F</sub>):</label>
+                        <input type="range" id="temperature-slider" min="0" max="0.5" step="0.01" value="0">
+                        <span id="temperature-value">0.00</span>
+                    </div>
+                </div>
+                <div class="visualization-container">
+                    <canvas id="fermi-sphere-viz" class="visualization" width="500" height="400"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="quasiparticles" class="section">
+            <h2>Quasiparticles and Landau Parameters</h2>
+            <div class="content-grid">
+                <div class="text-content">
+                    <p>
+                        Quasiparticles are the elementary excitations of the Fermi fluid. They have:
+                    </p>
+                    <ul>
+                        <li><strong>Renormalized mass:</strong> \(m^* = m(1 + F_1^s/3)\)</li>
+                        <li><strong>Finite lifetime:</strong> \(\tau \propto (E - E_F)^{-2}\)</li>
+                        <li><strong>Modified interactions:</strong> Described by Landau parameters \(F_l^{s,a}\)</li>
+                    </ul>
+                    <p>
+                        The quasiparticle energy near the Fermi surface is:
+                        $$E(\mathbf{k}) = E_F + v_F^*(|\mathbf{k}| - k_F)$$
+                    </p>
+                    <div class="controls">
+                        <label for="interaction-slider">Interaction Strength (F<sub>0</sub><sup>s</sup>):</label>
+                        <input type="range" id="interaction-slider" min="-0.8" max="2" step="0.1" value="0">
+                        <span id="interaction-value">0.0</span>
+                    </div>
+                </div>
+                <div class="visualization-container">
+                    <canvas id="quasiparticle-viz" class="visualization" width="500" height="400"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="interactions" class="section">
+            <h2>Interaction Effects</h2>
+            <div class="content-grid">
+                <div class="text-content">
+                    <p>
+                        Interactions between quasiparticles are characterized by the Landau interaction function:
+                        $$f(\mathbf{k}, \mathbf{k}') = \sum_{l=0}^{\infty} \left[F_l^s P_l(\cos\theta) + F_l^a P_l(\cos\theta) \boldsymbol{\sigma} \cdot \boldsymbol{\sigma}'\right]$$
+                    </p>
+                    <p>
+                        Key consequences:
+                    </p>
+                    <ul>
+                        <li><strong>Compressibility:</strong> \(\kappa = \kappa_0/(1 + F_0^s)\)</li>
+                        <li><strong>Spin susceptibility:</strong> \(\chi = \chi_0/(1 + F_0^a)\)</li>
+                        <li><strong>Specific heat:</strong> \(C_V \propto m^* T\)</li>
+                    </ul>
+                </div>
+                <div class="visualization-container">
+                    <canvas id="interaction-viz" class="visualization" width="500" height="400"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="transport" class="section">
+            <h2>Transport Properties</h2>
+            <div class="content-grid">
+                <div class="text-content">
+                    <p>
+                        Fermi fluids exhibit characteristic temperature dependencies in transport:
+                    </p>
+                    <ul>
+                        <li><strong>Resistivity:</strong> \(\rho(T) = \rho_0 + AT^2\) (T²-law)</li>
+                        <li><strong>Heat capacity:</strong> \(C_V = \gamma T\) (linear in T)</li>
+                        <li><strong>Wilson ratio:</strong> \(\mathcal{R} = \frac{\pi^2 k_B^2 \chi}{3 \mu_B^2 \gamma}\)</li>
+                    </ul>
+                    <p>
+                        These relationships break down when Fermi fluid theory fails, 
+                        signaling exotic quantum phases.
+                    </p>
+                </div>
+                <div class="visualization-container">
+                    <canvas id="transport-viz" class="visualization" width="500" height="400"></canvas>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Fermi Fluids Tutorial. Educational content for understanding quantum many-body systems.</p>
+    </footer>
+
+    <script>
+        // Simple math rendering for basic equations
+        function renderMath() {
+            // This would normally be handled by MathJax
+            // For now, equations are displayed as formatted text
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
